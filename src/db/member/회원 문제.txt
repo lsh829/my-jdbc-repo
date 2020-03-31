@@ -1,0 +1,103 @@
+1. sqldeveloper 에서 두개의 테이블을 만든다.
+
+2. 자바 - 프로그램 틀 작성
+  1) MemberDTO 클래스
+    package db.member1;
+
+    public class MemberDTO {
+        private String id, pwd, name, birth, email, tel;
+		:
+		
+  2) MemberDAO 인터페이스
+    package db.member1;
+
+    public interface MemberDAO {
+        public int insertMember(MemberDTO dto);
+        public int updateMember(MemberDTO dto);
+        public int deleteMember(String id);
+	
+        public MemberDTO readMember(String id);
+        public List<MemberDTO> listMember();
+        public List<MemberDTO> listMember(String val);
+    }
+
+  3) MemberDAOImpl 클래스 : MemberDAO  구현 클래스
+     package db.member1;
+
+     public class MemberDAOImpl implements MemberDAO {
+        private Connection conn=DBConn.getConnection();
+	
+        @Override
+        public int insertMember(MemberDTO dto) {
+
+            return 0;
+        }
+                   :
+    }
+
+  4) Member 클래스 : 입력 및 출력 클래스
+     package db.member1;
+
+     public class Member {
+         private Scanner sc=new Scanner(System.in);
+         // private BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+         private MemberDAO dao=new MemberDAOImpl(); 
+	
+         public void insertMember() {
+             System.out.println("\n회원 등록...");
+          }
+
+                  :
+     }
+
+  5) MemberApp 클래스 : 메인 클래스
+      public class MemberApp {
+          public static void main(String[] args) {
+              Member mm=new Member();
+              Scanner sc=new Scanner(System.in);
+              int ch;
+
+              while(true) {
+                  do {
+                      System.out.print("1.등록 2.수정 3.삭제 4.아이디검색 5.이름검색 6.리스트 7.종료 =>");
+                      ch=sc.nextInt();
+                  } while(ch<1 || ch>7);
+	
+                  if(ch == 1) {
+                      break;
+                  }
+		
+                  switch(ch) {
+                      case 1 : mm.insertMember(); break;
+                            :
+                  }
+             }
+          }
+      }
+
+3. 자바 - 회원 가입 작성 및 sqldeveloper 로 가입 유무 확인
+
+/*
+			sb=new StringBuilder();
+			sb.append("INSERT ALL ");
+			sb.append(" INTO member1(id,pwd,name) VALUES(");
+			sb.append(" '"+dto.getId()+"'");
+			sb.append(" ,'"+dto.getPwd()+"'");
+			sb.append(" ,'"+dto.getName()+"'");
+			sb.append(" )");
+			sb.append(" INTO member2(id,birth,email,tel) VALUES(");
+			sb.append(" '"+dto.getId()+"'");
+			sb.append(" ,'"+dto.getBirth()+"'");
+			sb.append(" ,'"+dto.getEmail()+"'");
+			sb.append(" ,'"+dto.getTel()+"'");
+			sb.append(" )");
+			sb.append(" SELECT * FROM dual");
+			
+			result=stmt.executeUpdate(sb.toString());
+ */
+
+4. 자바 - 리스트 작성
+
+          :
+
+
