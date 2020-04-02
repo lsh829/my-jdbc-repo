@@ -44,23 +44,22 @@ public class MemberDAOImpl implements MemberDAO {
 			cstmt.executeUpdate();
 			
 			result=1;
-
-			/*
-			sql = "INSERT ALL ";
-			sql += " INTO member1(id,pwd,name) VALUES(?,?,?) ";
-			sql += " INTO member2(id,birth,email,tel) VALUES(?,?,?,?) ";
-			sql += " SELECT * FROM dual";
 			
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, dto.getId());
-			pstmt.setString(2, dto.getPwd());
-			pstmt.setString(3, dto.getName());
-			pstmt.setString(4, dto.getId());
-			pstmt.setString(5, dto.getBirth());
-			pstmt.setString(6, dto.getEmail());
-			pstmt.setString(7, dto.getTel());
-			result = pstmt.executeUpdate();
-			 */
+			
+			// 프로시져 insertMember3으로 짤 수 있습니다. 
+			
+			//sql = "{CALL insertMember3(?,?,?,?,?,?)}";
+			//cstmt = conn.prepareCall(sql);
+			//cstmt.setString(1, dto.getId());
+			//cstmt.setString(2, dto.getPwd());
+			//cstmt.setString(3, dto.getName());
+			//cstmt.setString(4, dto.getBirth());
+			//cstmt.setString(5, dto.getEmail());
+			//cstmt.setString(6, dto.getTel());
+			//cstmt.executeUpdate();
+			
+			//result=1;
+
 
 		} catch (SQLException e) {
 			e.printStackTrace();
