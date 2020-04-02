@@ -1,5 +1,5 @@
 -- 20200402
------------== È¸¿ø ÇÁ·Î½ÃÁ® ÀÛ¼º ==-----------
+-----------== íšŒì› í”„ë¡œì‹œì ¸ ìž‘ì„± ==-----------
 desc member1;
 desc member2;
 
@@ -28,13 +28,13 @@ END;
 /  
 
 
-EXEC insertMember3('ccc',455,'µµ·¹¹Ì','20200401','tjsghk','030');
+EXEC insertMember3('ccc',455,'ë„ë ˆë¯¸','20200401','tjsghk','030');
 SELECT * FROM member1;
 SELECT * FROM member2;
 
 
             
--- member1 ÀúÀå(Ãß°¡) ÇÁ·Î½ÃÁ® ÀÛ¼º 
+-- member1 ì €ìž¥(ì¶”ê°€) í”„ë¡œì‹œì ¸ ìž‘ì„± 
 CREATE OR REPLACE PROCEDURE insertMember1
 (
     pId IN member1.id%TYPE
@@ -46,15 +46,15 @@ IS
 BEGIN
     INSERT INTO member1(id, pwd, name)
     VALUES ( pId, pPwd, pName);
-    -- update¿Í delete ÇÏ°í´Â ´Ù¸¥ ¿¹¿ÜÃ³¸®¸¦ ÇØÁà¾ßÇÑ´Ù.
+    -- updateì™€ delete í•˜ê³ ëŠ” ë‹¤ë¥¸ ì˜ˆì™¸ì²˜ë¦¬ë¥¼ í•´ì¤˜ì•¼í•œë‹¤.
     COMMIT;
 END;
 /
 
-EXEC insertMember1('ccc',455,'µµ·¹¹Ì');
+EXEC insertMember1('ccc',455,'ë„ë ˆë¯¸');
 SELECT * FROM member1;
 
--- member2 ÀúÀå(Ãß°¡) ÇÁ·Î½ÃÁ® ÀÛ¼º 
+-- member2 ì €ìž¥(ì¶”ê°€) í”„ë¡œì‹œì ¸ ìž‘ì„± 
 CREATE OR REPLACE PROCEDURE insertMember2
 (
     pId IN member2.id%TYPE
@@ -66,7 +66,7 @@ IS
 BEGIN
     INSERT INTO member2(id, birth, email, tel)
     VALUES ( pId, pBirth, pEmail, pTel);
-    -- update¿Í delete ÇÏ°í´Â ´Ù¸¥ ¿¹¿ÜÃ³¸®¸¦ ÇØÁà¾ßÇÑ´Ù.
+    -- updateì™€ delete í•˜ê³ ëŠ” ë‹¤ë¥¸ ì˜ˆì™¸ì²˜ë¦¬ë¥¼ í•´ì¤˜ì•¼í•œë‹¤.
     COMMIT;
 END;
 /
@@ -75,7 +75,7 @@ EXEC insertMember2('ccc','20200401','tjsghk','010');
 SELECT * FROM member2;
 
 --------------------------------
--- ¼öÁ¤ ÇÁ·Î½ÃÁ® 
+-- ìˆ˜ì • í”„ë¡œì‹œì ¸ 
 CREATE OR REPLACE PROCEDURE updateMember1
 (
    pId IN member1.id%TYPE
@@ -88,16 +88,18 @@ BEGIN
     WHERE id = pId;
     
     IF SQL%NOTFOUND THEN
-        -- NOTFOUND´Â COMMIT Àü¿¡ ÇØ¾ßÇÏ¸ç, 
-        -- ¿¡·¯ ÄÚµå´Â '20000' ´ë·Î Á¤ÇØÁà¾ß ÇÑ´Ù. 
-        RAISE_APPLICATION_ERROR(-20100, 'µî·ÏµÈ ÀÚ·á°¡ ¾Æ´Õ´Ï´Ù.');
+        -- NOTFOUNDëŠ” COMMIT ì „ì— í•´ì•¼í•˜ë©°, 
+        -- ì—ëŸ¬ ì½”ë“œëŠ” '20000' ëŒ€ë¡œ ì •í•´ì¤˜ì•¼ í•œë‹¤. 
+        RAISE_APPLICATION_ERROR(-20100, 'ë“±ë¡ëœ ìžë£Œê°€ ì•„ë‹™ë‹ˆë‹¤.');
     END IF;
     
-    COMMIT;-- ÇÁ·Î½ÃÁ®´Â Ä¿¹ÔÀÌ ÇÊ¼ö.
+    COMMIT;-- í”„ë¡œì‹œì ¸ëŠ” ì»¤ë°‹ì´ í•„ìˆ˜.
 END;
 /
 
--- ¼öÁ¤ ÇÁ·Î½ÃÁ® È®ÀÎ 
+
+-- ìˆ˜ì • í”„ë¡œì‹œì ¸ í™•ì¸ 
+
 EXEC updateMember1('ccc','5678');
 SELECT * FROM member1;
 
@@ -117,21 +119,22 @@ BEGIN
     WHERE id = pId;
     
     IF SQL%NOTFOUND THEN
-        -- NOTFOUND´Â COMMIT Àü¿¡ ÇØ¾ßÇÏ¸ç, 
-        -- ¿¡·¯ ÄÚµå´Â '20000' ´ë·Î Á¤ÇØÁà¾ß ÇÑ´Ù. 
-        RAISE_APPLICATION_ERROR(-20100, 'µî·ÏµÈ ÀÚ·á°¡ ¾Æ´Õ´Ï´Ù.');
+         -- NOTFOUNDëŠ” COMMIT ì „ì— í•´ì•¼í•˜ë©°, 
+        -- ì—ëŸ¬ ì½”ë“œëŠ” '20000' ëŒ€ë¡œ ì •í•´ì¤˜ì•¼ í•œë‹¤. 
+        RAISE_APPLICATION_ERROR(-20100, 'ë“±ë¡ëœ ìžë£Œê°€ ì•„ë‹™ë‹ˆë‹¤.');
     END IF;
     
-    COMMIT;-- ÇÁ·Î½ÃÁ®´Â Ä¿¹ÔÀÌ ÇÊ¼ö.
+    COMMIT;-- í”„ë¡œì‹œì ¸ëŠ” ì»¤ë°‹ì´ í•„ìˆ˜.
 END;
 /
 
--- ¼öÁ¤ ÇÁ·Î½ÃÁ® È®ÀÎ 
+-- ìˆ˜ì • í”„ë¡œì‹œì ¸ í™•ì¸  
 EXEC updateMember2('ccc','20200401', 'remi', '033');
 SELECT * FROM member2;
 
+
 -------------------------------------
--- »èÁ¦ ÇÁ·Î½ÃÁ® ÀÛ¼º
+-- ì‚­ì œ í”„ë¡œì‹œì ¸ ìž‘ì„±
 CREATE OR REPLACE PROCEDURE deleteMember2
 (
     pId IN member2.id%TYPE
@@ -140,11 +143,11 @@ CREATE OR REPLACE PROCEDURE deleteMember2
 IS
 BEGIN
     DELETE FROM member2 WHERE id=pId;
-    -- ¾ø´Â °ÍÀ» Ã³¸®ÇßÀ» °æ¿ì, ¿¹¿Ü Ã³¸® 
+    -- ì—†ëŠ” ê²ƒì„ ì²˜ë¦¬í–ˆì„ ê²½ìš°, ì˜ˆì™¸ ì²˜ë¦¬
     IF SQL%NOTFOUND THEN
-        -- NOTFOUND´Â COMMIT Àü¿¡ ÇØ¾ßÇÏ¸ç, 
-        -- ¿¡·¯ ÄÚµå´Â '20000' ´ë·Î Á¤ÇØÁà¾ß ÇÑ´Ù. 
-        RAISE_APPLICATION_ERROR(-20100, 'µî·ÏµÈ ÀÚ·á°¡ ¾Æ´Õ´Ï´Ù.');
+         -- NOTFOUNDëŠ” COMMIT ì „ì— í•´ì•¼í•˜ë©°, 
+        -- ì—ëŸ¬ ì½”ë“œëŠ” '20000' ëŒ€ë¡œ ì •í•´ì¤˜ì•¼ í•œë‹¤. 
+        RAISE_APPLICATION_ERROR(-20100, 'ë“±ë¡ëœ ìžë£Œê°€ ì•„ë‹™ë‹ˆë‹¤.');
     END IF;
     COMMIT;
 END;
@@ -164,11 +167,11 @@ CREATE OR REPLACE PROCEDURE deleteMember1
 IS
 BEGIN
     DELETE FROM member1 WHERE id=pId;
-    -- ¾ø´Â °ÍÀ» Ã³¸®ÇßÀ» °æ¿ì, ¿¹¿Ü Ã³¸® 
+     -- ì—†ëŠ” ê²ƒì„ ì²˜ë¦¬í–ˆì„ ê²½ìš°, ì˜ˆì™¸ ì²˜ë¦¬ 
     IF SQL%NOTFOUND THEN
-        -- NOTFOUND´Â COMMIT Àü¿¡ ÇØ¾ßÇÏ¸ç, 
-        -- ¿¡·¯ ÄÚµå´Â '20000' ´ë·Î Á¤ÇØÁà¾ß ÇÑ´Ù. 
-        RAISE_APPLICATION_ERROR(-20100, 'µî·ÏµÈ ÀÚ·á°¡ ¾Æ´Õ´Ï´Ù.');
+         -- NOTFOUNDëŠ” COMMIT ì „ì— í•´ì•¼í•˜ë©°, 
+        -- ì—ëŸ¬ ì½”ë“œëŠ” '20000' ëŒ€ë¡œ ì •í•´ì¤˜ì•¼ í•œë‹¤. 
+        RAISE_APPLICATION_ERROR(-20100, 'ë“±ë¡ëœ ìžë£Œê°€ ì•„ë‹™ë‹ˆë‹¤.');
     END IF;
     COMMIT;
 END;
@@ -178,12 +181,13 @@ EXEC deleteMember1('ccc');
 SELECT * FROM member1;
 
 
--- ÀüÃ¼ ¸®½ºÆ® ÇÁ·Î½ÃÁ® 
--- SELECT ÁÖÀÇÇØ¼­ Â¥¾ßÇÑ´Ù. ¿Ö³ÄÇÏ¸é Å×½ºÆÃ ºÒ°¡ÀÌ±â ¶§¹®ÀÌ´Ù. 
+-- ì „ì²´ ë¦¬ìŠ¤íŠ¸ í”„ë¡œì‹œì ¸ 
+-- SELECT ì£¼ì˜í•´ì„œ ì§œì•¼í•œë‹¤. ì™œëƒí•˜ë©´ í…ŒìŠ¤íŒ… ë¶ˆê°€ì´ê¸° ë•Œë¬¸ì´ë‹¤. 
+
 
 CREATE OR REPLACE PROCEDURE listMember
 (
-    pResult OUT SYS_REFCURSOR --pResult ¿¡ ´ã¾ÆÁÖ´Â °Í.
+    pResult OUT SYS_REFCURSOR  --pResult ì— ë‹´ì•„ì£¼ëŠ” ê²ƒ.
 )
 IS
 BEGIN
@@ -195,10 +199,10 @@ BEGIN
 END;
 /
 --------------------------------------------------------
--- ÀÌ¸§ °Ë»ö ÇÁ·Î½ÃÁ® 
+-- ì´ë¦„ ê²€ìƒ‰ í”„ë¡œì‹œì ¸ 
 CREATE OR REPLACE PROCEDURE findByNameMember
 (
-    pResult OUT SYS_REFCURSOR --pResult ¿¡ ´ã¾ÆÁÖ´Â °Í.
+    pResult OUT SYS_REFCURSOR--pResult ì— ë‹´ì•„ì£¼ëŠ” ê²ƒ.
     , pName IN VARCHAR2
 )
 IS
@@ -213,10 +217,10 @@ END;
 /
 
 --------------------------------------------------
--- ¾ÆÀÌµð °Ë»ö ÇÁ·Î½ÃÁ® 
+-- ì•„ì´ë”” ê²€ìƒ‰ í”„ë¡œì‹œì ¸ 
 CREATE OR REPLACE PROCEDURE findByIdMember
 (
-    pResult OUT SYS_REFCURSOR --pResult ¿¡ ´ã¾ÆÁÖ´Â °Í.
+    pResult OUT SYS_REFCURSOR --pResult ì— ë‹´ì•„ì£¼ëŠ” ê²ƒ.
     , pId IN VARCHAR2
 )
 IS
