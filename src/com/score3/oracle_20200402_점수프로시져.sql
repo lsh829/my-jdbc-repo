@@ -20,7 +20,7 @@ END;
 /
 
 -- 프로시져 확인 
-EXEC insertScore('9999','������','2000-10-10',80,90,70);
+EXEC insertScore('9999','나나나','2000-10-10',80,90,70);
 SELECT * FROM score;
 
 
@@ -44,7 +44,7 @@ BEGIN
     IF SQL%NOTFOUND THEN
         -- NOTFOUND는 COMMIT 전에 해야하며, 
         -- 에러 코드는 '20000' 대로 정해줘야 한다.
-        RAISE_APPLICATION_ERROR(-20100, '��ϵ� �ڷᰡ �ƴմϴ�.');
+        RAISE_APPLICATION_ERROR(-20100, '등록된 자료가 아닙니다.');
     END IF;
     
     COMMIT;-- 프로시져는 커밋이 필수.
@@ -52,7 +52,7 @@ END;
 /
 
 -- 수정 프로시져 확인 
-EXEC updateScore('9999','����','2001-11-11',70,60,70);
+EXEC updateScore('9999','나나나','2001-11-11',70,60,70);
 SELECT * FROM score;
 
 -------------------------------------
@@ -69,7 +69,7 @@ BEGIN
     IF SQL%NOTFOUND THEN
          -- NOTFOUND는 COMMIT 전에 해야하며, 
          -- 에러 코드는 '20000' 대로 정해줘야 한다. 
-        RAISE_APPLICATION_ERROR(-20100, '��ϵ� �ڷᰡ �ƴմϴ�.');
+        RAISE_APPLICATION_ERROR(-20100, '등록된 자료가 아닙니다.');
     END IF;
     COMMIT;
 END;
