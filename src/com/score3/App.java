@@ -1,7 +1,7 @@
 package com.score3;
 
 import java.util.Scanner;
-
+//CallableStatement 
 public class App {
 
 	public static void main(String[] args) {
