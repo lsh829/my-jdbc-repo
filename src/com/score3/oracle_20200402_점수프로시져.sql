@@ -1,6 +1,6 @@
 -- 2020-4-2 
 
--- ÀúÀå(Ãß°¡) ÇÁ·Î½ÃÁ® ÀÛ¼º 
+-- ì €ìž¥(ì¶”ê°€) í”„ë¡œì‹œì ¸ ìž‘ì„± 
 CREATE OR REPLACE PROCEDURE insertScore 
 (
     pHak IN score.hak%TYPE
@@ -14,18 +14,18 @@ IS
 BEGIN
     INSERT INTO score(hak, name, birth, kor, eng, mat)
     VALUES ( pHak, pName, pBirth, pKor, pEng, pMat);
-    -- update¿Í delete ÇÏ°í´Â ´Ù¸¥ ¿¹¿ÜÃ³¸®¸¦ ÇØÁà¾ßÇÑ´Ù.
+    -- updateì™€ delete í•˜ê³ ëŠ” ë‹¤ë¥¸ ì˜ˆì™¸ì²˜ë¦¬ë¥¼ í•´ì¤˜ì•¼í•œë‹¤.
     COMMIT;
 END;
 /
 
--- ÇÁ·Î½ÃÁ® È®ÀÎ 
-EXEC insertScore('9999','³ª³ª³ª','2000-10-10',80,90,70);
+-- í”„ë¡œì‹œì ¸ í™•ì¸ 
+EXEC insertScore('9999','ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½','2000-10-10',80,90,70);
 SELECT * FROM score;
 
 
 --------------------------------
--- ¼öÁ¤ ÇÁ·Î½ÃÁ® 
+-- ìˆ˜ì • í”„ë¡œì‹œì ¸ 
 CREATE OR REPLACE PROCEDURE updateScore 
 (
     pHak IN score.hak%TYPE
@@ -42,21 +42,21 @@ BEGIN
     WHERE hak = pHak;
     
     IF SQL%NOTFOUND THEN
-        -- NOTFOUND´Â COMMIT Àü¿¡ ÇØ¾ßÇÏ¸ç, 
-        -- ¿¡·¯ ÄÚµå´Â '20000' ´ë·Î Á¤ÇØÁà¾ß ÇÑ´Ù. 
-        RAISE_APPLICATION_ERROR(-20100, 'µî·ÏµÈ ÀÚ·á°¡ ¾Æ´Õ´Ï´Ù.');
+        -- NOTFOUNDëŠ” COMMIT ì „ì— í•´ì•¼í•˜ë©°, 
+        -- ì—ëŸ¬ ì½”ë“œëŠ” '20000' ëŒ€ë¡œ ì •í•´ì¤˜ì•¼ í•œë‹¤.
+        RAISE_APPLICATION_ERROR(-20100, 'ï¿½ï¿½Ïµï¿½ ï¿½Ú·á°¡ ï¿½Æ´Õ´Ï´ï¿½.');
     END IF;
     
-    COMMIT;-- ÇÁ·Î½ÃÁ®´Â Ä¿¹ÔÀÌ ÇÊ¼ö.
+    COMMIT;-- í”„ë¡œì‹œì ¸ëŠ” ì»¤ë°‹ì´ í•„ìˆ˜.
 END;
 /
 
--- ¼öÁ¤ ÇÁ·Î½ÃÁ® È®ÀÎ 
-EXEC updateScore('9999','³ë³ë³ë','2001-11-11',70,60,70);
+-- ìˆ˜ì • í”„ë¡œì‹œì ¸ í™•ì¸ 
+EXEC updateScore('9999','ï¿½ï¿½ï¿½ï¿½','2001-11-11',70,60,70);
 SELECT * FROM score;
 
 -------------------------------------
--- »èÁ¦ ÇÁ·Î½ÃÁ® ÀÛ¼º
+-- ì‚­ì œ í”„ë¡œì‹œì ¸ ìž‘ì„±
 CREATE OR REPLACE PROCEDURE deleteScore 
 (
     pHak IN score.hak%TYPE
@@ -65,11 +65,11 @@ CREATE OR REPLACE PROCEDURE deleteScore
 IS
 BEGIN
     DELETE FROM score WHERE hak=pHak;
-    -- ¾ø´Â °ÍÀ» Ã³¸®ÇßÀ» °æ¿ì, ¿¹¿Ü Ã³¸® 
+   -- ì—†ëŠ” ê²ƒì„ ì²˜ë¦¬í–ˆì„ ê²½ìš°, ì˜ˆì™¸ ì²˜ë¦¬ 
     IF SQL%NOTFOUND THEN
-        -- NOTFOUND´Â COMMIT Àü¿¡ ÇØ¾ßÇÏ¸ç, 
-        -- ¿¡·¯ ÄÚµå´Â '20000' ´ë·Î Á¤ÇØÁà¾ß ÇÑ´Ù. 
-        RAISE_APPLICATION_ERROR(-20100, 'µî·ÏµÈ ÀÚ·á°¡ ¾Æ´Õ´Ï´Ù.');
+         -- NOTFOUNDëŠ” COMMIT ì „ì— í•´ì•¼í•˜ë©°, 
+         -- ì—ëŸ¬ ì½”ë“œëŠ” '20000' ëŒ€ë¡œ ì •í•´ì¤˜ì•¼ í•œë‹¤. 
+        RAISE_APPLICATION_ERROR(-20100, 'ï¿½ï¿½Ïµï¿½ ï¿½Ú·á°¡ ï¿½Æ´Õ´Ï´ï¿½.');
     END IF;
     COMMIT;
 END;
@@ -79,12 +79,12 @@ EXEC deleteScore('9999');
 SELECT * FROM score;
 
 ---------------------------------------
--- ÀüÃ¼ ¸®½ºÆ® ÇÁ·Î½ÃÁ® 
--- SELECT ÁÖÀÇÇØ¼­ Â¥¾ßÇÑ´Ù. ¿Ö³ÄÇÏ¸é Å×½ºÆÃ ºÒ°¡ÀÌ±â ¶§¹®ÀÌ´Ù. 
+-- ì „ì²´ ë¦¬ìŠ¤íŠ¸ í”„ë¡œì‹œì ¸ 
+-- SELECT ì£¼ì˜í•´ì„œ ì§œì•¼í•œë‹¤. ì™œëƒí•˜ë©´ í…ŒìŠ¤íŒ… ë¶ˆê°€ì´ê¸° ë•Œë¬¸ì´ë‹¤.  
 
 CREATE OR REPLACE PROCEDURE listScore
 (
-    pResult OUT SYS_REFCURSOR --pResult ¿¡ ´ã¾ÆÁÖ´Â °Í.
+    pResult OUT SYS_REFCURSOR --pResult ì— ë‹´ì•„ì£¼ëŠ” ê²ƒ..
 )
 IS
 BEGIN
@@ -96,11 +96,12 @@ BEGIN
 END;
 /
 
+
 --------------------------------------------------
--- ÀÌ¸§ °Ë»ö ÇÁ·Î½ÃÁ® 
+-- ì´ë¦„ ê²€ìƒ‰ í”„ë¡œì‹œì ¸ 
 CREATE OR REPLACE PROCEDURE findByNameScore
 (
-    pResult OUT SYS_REFCURSOR --pResult ¿¡ ´ã¾ÆÁÖ´Â °Í.
+    pResult OUT SYS_REFCURSOR --pResult ì— ë‹´ì•„ì£¼ëŠ” ê²ƒ.
     , pName IN VARCHAR2
 )
 IS
@@ -113,11 +114,12 @@ BEGIN
 END;
 /
 
+
 --------------------------------------------------
--- ÇÐ¹ø °Ë»ö ÇÁ·Î½ÃÁ® 
+-- í•™ë²ˆ ê²€ìƒ‰ í”„ë¡œì‹œì ¸ 
 CREATE OR REPLACE PROCEDURE findByHakScore
 (
-    pResult OUT SYS_REFCURSOR --pResult ¿¡ ´ã¾ÆÁÖ´Â °Í.
+    pResult OUT SYS_REFCURSOR --pResult ì— ë‹´ì•„ì£¼ëŠ” ê²ƒ.
     , pHak IN VARCHAR2
 )
 IS
@@ -129,9 +131,10 @@ BEGIN
          WHERE hak = pHak;
 END;
 /
----------------------------------------------------------------
--- °ú¸ñº° ÀüÃ¼ Æò±Õ ÇÁ·Î½ÃÁ® 
 
+
+---------------------------------------------------------------
+-- ê³¼ëª©ë³„ ì „ì²´ í‰ê·  í”„ë¡œì‹œì ¸ 
 CREATE OR REPLACE PROCEDURE averageScore
 (
     pKor OUT NUMBER
